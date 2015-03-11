@@ -13,4 +13,11 @@ EditorUserBuildSettings.asset
 /iOS
 /Web
 *.apk
-/Android
+Android/.*
+Android/AndroidManifest.xml
+Android/bin
+Android/gen
+Android/ic*
+Android/libs/android-support-v4.jar
+Android/pro*
+Android/res

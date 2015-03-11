@@ -7,12 +7,26 @@ public class DetectHeadset {
 	[DllImport ("__Internal")]
 	static private extern bool _Detect();
 
+	#if UNITY_ANDROID
+		static AndroidJavaClass androidClass;
+	#endif
+
 	static public bool Detect() {
 
-		if (Application.platform == RuntimePlatform.IPhonePlayer)
+		#if UNITY_IOS
 			return _Detect();
 
-		else
+		#elif UNITY_ANDROID
+			
+			if (androidClass == null) {
+				AndroidJNI.AttachCurrentThread();
+				androidClass = new AndroidJavaClass("com.davikingcode.DetectHeadset.DetectHeadset");
+			}
+
+			return androidClass.CallStatic<bool>("_Detect");
+
+		#else
 			return true;
+		#endif
 	}
 }
