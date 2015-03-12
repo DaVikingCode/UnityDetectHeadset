@@ -6,3 +6,6 @@ UnityDetectHeadset is a [Unity native plugin](http://docs.unity3d.com/Manual/Nat
 To use it, import the Plugins folder and inside your code call: `DetectHeadset.Detect();`.
 
 Note it will return **true** on *non supported platform*.
+
+For Android, you need to add a permission:  
+`<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>`
