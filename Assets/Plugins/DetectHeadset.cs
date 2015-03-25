@@ -16,7 +16,7 @@ public class DetectHeadset {
 		#if UNITY_IOS
 			return _Detect();
 
-		#elif UNITY_ANDROID
+		#elif UNITY_ANDROID && !UNITY_EDITOR
 			
 			if (androidClass == null) {
 				AndroidJNI.AttachCurrentThread();
@@ -26,7 +26,7 @@ public class DetectHeadset {
 			return androidClass.CallStatic<bool>("_Detect");
 
 		#else
-			return true;
+			return false;
 		#endif
 	}
 }
