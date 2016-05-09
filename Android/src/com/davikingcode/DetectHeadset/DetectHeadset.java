@@ -2,22 +2,17 @@ package com.davikingcode.DetectHeadset;
 
 import android.content.Context;
 import android.media.AudioManager;
-import android.os.Bundle;
 
-import com.unity3d.player.UnityPlayerActivity;
-
-public class DetectHeadset extends UnityPlayerActivity {
+public class DetectHeadset {
 	
 	static AudioManager myAudioManager;
 	
-	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
+	public DetectHeadset(Context context) {
 		
-		myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+		myAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 	}
 	
-	static public boolean _Detect() {
+	public boolean _Detect() {
 		
 		return myAudioManager.isWiredHeadsetOn();
 	}

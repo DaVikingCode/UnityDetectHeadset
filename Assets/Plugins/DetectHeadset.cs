@@ -4,29 +4,26 @@ using System.Runtime.InteropServices;
 
 public class DetectHeadset {
 
-	[DllImport ("__Internal")]
-	static private extern bool _Detect();
-
-	#if UNITY_ANDROID
-		static AndroidJavaClass androidClass;
-	#endif
-
 	static public bool Detect() {
 
 		#if UNITY_IOS
 			return _Detect();
 
 		#elif UNITY_ANDROID && !UNITY_EDITOR
-			
-			if (androidClass == null) {
-				AndroidJNI.AttachCurrentThread();
-				androidClass = new AndroidJavaClass("com.davikingcode.DetectHeadset.DetectHeadset");
+
+			using (var javaUnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer")) {
+
+				using (var currentActivity = javaUnityPlayer.GetStatic<AndroidJavaObject>("currentActivity")) {
+
+					using (var androidPlugin = new AndroidJavaObject("com.davikingcode.DetectHeadset.DetectHeadset", currentActivity)) {
+
+						return androidPlugin.Call<bool>("_Detect");
+					}
+				}
 			}
 
-			return androidClass.CallStatic<bool>("_Detect");
-
 		#else
-			return false;
+			return true;
 		#endif
 	}
 }
