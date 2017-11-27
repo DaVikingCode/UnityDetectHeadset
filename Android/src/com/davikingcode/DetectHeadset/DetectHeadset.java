@@ -15,6 +15,6 @@ public class DetectHeadset {
 	public boolean _Detect() {
 		if(myAudioManager.isWiredHeadsetOn() || myAudioManager.isBluetoothA2dpOn()){
 			return true;
-		}else false;
+		}else return false;
 	}
 }
