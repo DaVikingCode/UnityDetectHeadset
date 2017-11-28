@@ -7,5 +7,6 @@ To use it, import the Plugins folder and inside your code call: `DetectHeadset.D
 
 Note it will return **true** on *non supported platform*.
 
-For Android, you need to add a permission:  
+For Android, you need to add permissions:  
 `<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>`
+`<uses-permission android:name="android.permission.BLUETOOTH"/>`

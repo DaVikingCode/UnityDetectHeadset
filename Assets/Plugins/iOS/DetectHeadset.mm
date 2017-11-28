@@ -9,6 +9,8 @@ extern "C" {
         for (AVAudioSessionPortDescription* desc in [route outputs]) {
             if ([[desc portType] isEqualToString:AVAudioSessionPortHeadphones])
                 return true;
+            if ([[desc portType] isEqualToString:AVAudioSessionPortBluetoothHFP])
+                return true;
         }
         
         return false;
