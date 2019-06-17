@@ -11,6 +11,10 @@ extern "C" {
                 return true;
             if ([[desc portType] isEqualToString:AVAudioSessionPortBluetoothHFP])
                 return true;
+	    //It was displaying this route for bluetooth wireless headphones.
+            //Tested with Unity 2019.1
+            if ([[desc portType] isEqualToString:AVAudioSessionPortBluetoothA2DP])
+                return true;
         }
         
         return false;

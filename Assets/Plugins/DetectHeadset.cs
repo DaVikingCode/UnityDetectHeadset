@@ -9,7 +9,7 @@ public class DetectHeadset {
 
 	static public bool Detect() {
 
-		#if UNITY_IOS
+		#if UNITY_IOS  && !UNITY_EDITOR
 			return _Detect();
 
 		#elif UNITY_ANDROID && !UNITY_EDITOR
