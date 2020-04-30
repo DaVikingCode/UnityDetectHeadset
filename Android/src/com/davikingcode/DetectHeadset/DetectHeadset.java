@@ -11,18 +11,24 @@ public class DetectHeadset {
 		myAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 	}
 	
-	public boolean _Detect() {
+	public boolean _Detect()
+	{
 		//Added validation for newer api's above 26.
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+		{
 		    AudioDeviceInfo[] audioDeviceInfos = myAudioManager.getDevices(AudioManager.GET_DEVICES_INPUTS);
-		    for (int i=0;i<audioDeviceInfos.length; i++){
-			if(audioDeviceInfos[i].getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO ||
-				audioDeviceInfos[i].getType() == AudioDeviceInfo.TYPE_WIRED_HEADSET)
+		    for (int i=0;i<audioDeviceInfos.length; i++)
+		    {
+			if (audioDeviceInfos[i].getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO ||
+				audioDeviceInfos[i].getType() == AudioDeviceInfo.TYPE_WIRED_HEADSET ||
+			   	audioDeviceInfos[i].getType() == AudioDeviceInfo.TYPE_WIRED_HEADPHONES)
 			    return true;
 		    }
-		}else {
+		}
+		else
+		{
 		    //This should work as expected for the older api's
-		    if(myAudioManager.isWiredHeadsetOn() || myAudioManager.isBluetoothA2dpOn())
+		    if (myAudioManager.isWiredHeadsetOn() || myAudioManager.isBluetoothA2dpOn())
 			return true;
 		}
 		return false;
