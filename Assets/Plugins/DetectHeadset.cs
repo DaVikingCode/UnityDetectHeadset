@@ -8,10 +8,19 @@ public class DetectHeadset
 		[DllImport ("__Internal")]
 		static private extern bool _Detect();
 	#endif
+		
+	static public bool CanDetect()
+	{
+		#if (UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
+			return true;
+		#endif
+			
+		return false;
+	}
 
 	static public bool Detect()
 	{
-		#if UNITY_IOS  && !UNITY_EDITOR
+		#if UNITY_IOS && !UNITY_EDITOR
 			return _Detect();
 
 		#elif UNITY_ANDROID && !UNITY_EDITOR
