@@ -6,6 +6,9 @@ namespace NativeAudioHelper
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
     internal class MoqAudioHelper : IAudioHelper
     {
+        private readonly float maxVolume = 1f;
+        private float volume = 0.75f;
+
         public void Dispose()
         {
         }
@@ -17,12 +20,17 @@ namespace NativeAudioHelper
 
         public float GetDeviceVolume()
         {
-            throw new NotImplementedException();
+            return volume;
         }
 
         public void SetDeviceVolume(float delta)
         {
-            throw new NotImplementedException();
+            volume = delta;
+        }
+
+        public float GetDeviceMaxVolume()
+        {
+            return maxVolume;
         }
     }
 }

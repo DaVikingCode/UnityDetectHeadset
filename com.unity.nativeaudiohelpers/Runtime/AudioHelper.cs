@@ -8,30 +8,17 @@ namespace NativeAudioHelper
     {
         private readonly IAudioHelper nativeAudioHelper;
 
-        public AudioHelper()
-        {
-            nativeAudioHelper = CreateAudioHelperImplementation();
-        }
+        public AudioHelper() => nativeAudioHelper = CreateAudioHelperImplementation();
 
-        public void Dispose()
-        {
-            nativeAudioHelper.Dispose();
-        }
+        public void Dispose() => nativeAudioHelper.Dispose();
 
-        public bool IsHeadphonesConnected()
-        {
-            return nativeAudioHelper.IsHeadphonesConnected();
-        }
+        public bool IsHeadphonesConnected() => nativeAudioHelper.IsHeadphonesConnected();
 
-        public float GetDeviceVolume()
-        {
-            return nativeAudioHelper.GetDeviceVolume();
-        }
+        public float GetDeviceVolume() => nativeAudioHelper.GetDeviceVolume();
 
-        public void SetDeviceVolume(float delta)
-        {
-            nativeAudioHelper.SetDeviceVolume(delta);
-        }
+        public void SetDeviceVolume(float delta) => nativeAudioHelper.SetDeviceVolume(delta);
+
+        public float GetDeviceMaxVolume() => nativeAudioHelper.GetDeviceMaxVolume();
 
         private IAudioHelper CreateAudioHelperImplementation()
         {

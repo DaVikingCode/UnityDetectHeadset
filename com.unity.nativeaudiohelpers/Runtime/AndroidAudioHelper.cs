@@ -1,5 +1,4 @@
 ﻿#if UNITY_ANDROID
-using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -10,9 +9,12 @@ namespace NativeAudioHelper
     {
         private const string UnityPlayerClassName = "com.unity3d.player.UnityPlayer";
         private const string CurrentActivityName = "currentActivity";
-        private const string PluginNamespace = "com.davikingcode.DetectHeadset.DetectHeadset";
+        private const string PluginNamespace = "com.unity.audiohelpers.AudioHelpers";
 
-        private const string DetectMethodName = "_Detect";
+        private const string IsHeadphonesOnMethodName = "_IsHeadphonesOn";
+        private const string GetSystemVolumeMethodName = "_GetSystemVolume";
+        private const string SetSystemVolumeMethodName = "_SetSystemVolume";
+        private const string GetDeviceMaxVolumeMethodName = "_GetDeviceMaxVolume";
 
         private AndroidJavaObject androidPlugin;
 
@@ -20,11 +22,13 @@ namespace NativeAudioHelper
 
         public void Dispose() => androidPlugin.Dispose();
 
-        public bool IsHeadphonesConnected() => androidPlugin.Call<bool>(DetectMethodName);
+        public bool IsHeadphonesConnected() => androidPlugin.Call<bool>(IsHeadphonesOnMethodName);
 
-        public float GetDeviceVolume() => throw new NotImplementedException();
+        public float GetDeviceVolume() => androidPlugin.Call<float>(GetSystemVolumeMethodName);
 
-        public void SetDeviceVolume(float delta) => throw new NotImplementedException();
+        public void SetDeviceVolume(float volume) => androidPlugin.Call(SetSystemVolumeMethodName, volume);
+
+        public float GetDeviceMaxVolume() =>androidPlugin.Call<float>(GetDeviceMaxVolumeMethodName);
 
         private void InitializePlugin()
         {
