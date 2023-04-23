@@ -1,0 +1,11 @@
+{
+  "name": "com.unity.nativeaudiohelpers",
+  "version": "0.0.1",
+  "displayName": "Native Audio Helpers",
+  "description": "Native Audio Helpers",
+  "unity": "2021.3",
+  "author": {
+    "name": "Andrew Urbanovich",
+    "email": "urbanovichwork@gmail.com"
+  }
+}
