@@ -6,11 +6,15 @@ using JetBrains.Annotations;
 namespace NativeAudioHelper
 {
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class IOSAudioHelper : IAudioHelper
+    internal class IOSAudioHelper : IAudioHelper
     {
         [DllImport ("__Internal")]
         private static extern bool _Detect();
-        
+
+        public void Dispose()
+        {
+        }
+
         public bool IsHeadphonesConnected()
         {
             return _Detect();

@@ -6,35 +6,31 @@ using UnityEngine;
 namespace NativeAudioHelper
 {
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class AndroidAudioHelper : IAudioHelper
+    internal class AndroidAudioHelper : IAudioHelper
     {
+        private const string UnityPlayerClassName = "com.unity3d.player.UnityPlayer";
+        private const string CurrentActivityName = "currentActivity";
+        private const string PluginNamespace = "com.davikingcode.DetectHeadset.DetectHeadset";
+
+        private const string DetectMethodName = "_Detect";
+
         private AndroidJavaObject androidPlugin;
 
-        public AndroidAudioHelper()
-        {
-            InitializePlugin();
-        }
+        public AndroidAudioHelper() => InitializePlugin();
 
-        public bool IsHeadphonesConnected()
-        {
-            return androidPlugin.Call<bool>("_Detect");
-        }
+        public void Dispose() => androidPlugin.Dispose();
 
-        public float GetDeviceVolume()
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsHeadphonesConnected() => androidPlugin.Call<bool>(DetectMethodName);
 
-        public void SetDeviceVolume(float delta)
-        {
-            throw new NotImplementedException();
-        }
+        public float GetDeviceVolume() => throw new NotImplementedException();
+
+        public void SetDeviceVolume(float delta) => throw new NotImplementedException();
 
         private void InitializePlugin()
         {
-            using var javaUnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            using var currentActivity = javaUnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-            androidPlugin = new AndroidJavaObject("com.davikingcode.DetectHeadset.DetectHeadset", currentActivity);
+            using var javaUnityPlayer = new AndroidJavaClass(UnityPlayerClassName);
+            using var currentActivity = javaUnityPlayer.GetStatic<AndroidJavaObject>(CurrentActivityName);
+            androidPlugin = new AndroidJavaObject(PluginNamespace, currentActivity);
         }
     }
 }

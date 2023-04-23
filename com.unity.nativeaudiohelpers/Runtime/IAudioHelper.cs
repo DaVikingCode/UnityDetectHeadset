@@ -5,5 +5,6 @@ namespace NativeAudioHelper
         public bool IsHeadphonesConnected();
         public float GetDeviceVolume();
         public void SetDeviceVolume(float delta);
+        public void Dispose();
     }
 }

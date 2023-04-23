@@ -4,8 +4,12 @@ using JetBrains.Annotations;
 namespace NativeAudioHelper
 {
     [UsedImplicitly(ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature)]
-    public class MoqAudioHelper : IAudioHelper
+    internal class MoqAudioHelper : IAudioHelper
     {
+        public void Dispose()
+        {
+        }
+
         public bool IsHeadphonesConnected()
         {
             return true;
